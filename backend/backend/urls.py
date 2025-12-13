@@ -21,6 +21,7 @@ from screener import views
 
 router = routers.DefaultRouter()
 router.register(r'screeners', views.ScreenerView, 'screener')
+router.register(r'stocks', views.StockView, 'stock')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
