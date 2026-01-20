@@ -33,7 +33,7 @@ class App extends Component {
   };
 
   getPrice(stock) {
-    axios
+    axios-
       .get(`/api/stocks/fetch_prev_close/?ticker=${stock.stock_ticker}`)
       .then((res) => {
         this.setState((prevState) => ({
@@ -93,7 +93,7 @@ class App extends Component {
           </div>
           <ul>
             {this.state.stockList.map((item) => (
-              <li key={item.id}>{item.stock_ticker} - ${item.recent_price}</li>
+              <li key={item.id}>{item.stock_ticker} - ${item.recent_price} <button>Financials</button></li>
             ))}
           </ul>
       </div>

@@ -2,6 +2,17 @@ import yfinance as yf
 from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from .models import Stock
+from sec_api import QueryApi
+from tasks import get_sec_financials, get_sec_primary_financials
+
+
+def get_financials(ticker: str, consolidated: bool):
+    if consolidated:
+        statements = get_sec_primary_financials
+    else:
+        statements = get_sec_financials(ticker)
+    return statements
+
 
 def get_stock_info(ticker: str):
     try:
@@ -18,6 +29,7 @@ def get_stock_info(ticker: str):
 
     except Exception:
         return None
+
 
 def get_prev_close_price(ticker: str) -> Decimal:
     ticker = ticker.upper()

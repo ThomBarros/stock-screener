@@ -7,7 +7,6 @@ from .models import Screener, Stock
 from .serializers import ScreenerSerializer, StockSerializer
 from .services import get_prev_close_price, get_stock_info
 
-
 # Create your views here.
 
 class ScreenerView(viewsets.ModelViewSet):
@@ -48,7 +47,6 @@ class StockView(viewsets.ModelViewSet):
                 StockSerializer(stock).data,
                 status=status.HTTP_200_OK
             )
-
 
     @action(detail=False, methods=["get", "post"])
     def fetch_prev_close(self, request):
