@@ -15,6 +15,7 @@ class Stock(models.Model):
     recent_price = models.DecimalField(max_digits=10, decimal_places=5)
     listed_index = models.TextField(blank=True)
     market_cap = models.BigIntegerField(null=True, blank=True)
+    consolidated = models.BooleanField(default=True)
 
     def __str__(self):
         return self.stock_ticker

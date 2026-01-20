@@ -240,7 +240,7 @@ def extract_financial_statements(facts: dict) -> Dict[str, pd.DataFrame]:
     return dfs
 
 
-def get_sec_primary_financials(ticker: str):
+def get_sec_primary_financials(ticker: str) -> Dict:
     cik = get_cik_from_ticker(ticker)
     facts = get_company_facts(cik)
 
@@ -251,21 +251,21 @@ def get_sec_primary_financials(ticker: str):
     }
 
 
-def get_sec_financials(ticker: str):
+def get_sec_financials(ticker: str) -> Dict:
     cik = get_cik_from_ticker(ticker)
     facts = get_company_facts(cik)
     statements = extract_financial_statements(facts)
     return statements
 
 
-if __name__ == "__main__":
-    statements = get_sec_financials("AAPL")
-    primary_statements = get_sec_primary_financials("AAPL")
+# if __name__ == "__main__":
+#     statements = get_sec_financials("AAPL")
+#     primary_statements = get_sec_primary_financials("AAPL")
 
-    for name, df in statements.items():
-        print(f"\n{name}")
-        print(df.head(15))
+#     for name, df in statements.items():
+#         print(f"\n{name}")
+#         print(df.head(15))
 
-    for name, df in primary_statements.items():
-        print(f"\n{name}")
-        print(df.head(15))
+#     for name, df in primary_statements.items():
+#         print(f"\n{name}")
+#         print(df.head(15))

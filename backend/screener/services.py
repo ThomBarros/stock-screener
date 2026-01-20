@@ -3,12 +3,12 @@ from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from .models import Stock
 from sec_api import QueryApi
-from tasks import get_sec_financials, get_sec_primary_financials
+from .tasks import get_sec_financials, get_sec_primary_financials
 
 
 def get_financials(ticker: str, consolidated: bool):
     if consolidated:
-        statements = get_sec_primary_financials
+        statements = get_sec_primary_financials(ticker)
     else:
         statements = get_sec_financials(ticker)
     return statements
@@ -33,13 +33,9 @@ def get_stock_info(ticker: str):
 
 def get_prev_close_price(ticker: str) -> Decimal:
     ticker = ticker.upper()
-
     stock = get_object_or_404(Stock, stock_ticker=ticker)
-
     yf_ticker = yf.Ticker(ticker)
-
     prev_close = yf_ticker.info["regularMarketPrice"]
-
     stock.recent_price = prev_close
     stock.save(update_fields=["recent_price"])
 

@@ -5,7 +5,7 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from .models import Screener, Stock
 from .serializers import ScreenerSerializer, StockSerializer
-from .services import get_prev_close_price, get_stock_info
+from .services import get_prev_close_price, get_stock_info, get_financials
 
 # Create your views here.
 
@@ -64,3 +64,30 @@ class StockView(viewsets.ModelViewSet):
 
         price = get_prev_close_price(ticker)
         return Response({"prev_close": price})
+    
+    @action(detail=False, methods=["get"])
+    def fetch_financial_info(self, request):
+        ticker = request.query_params.get("ticker")
+        if not ticker:
+            return Response(
+                {"error": "ticker is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        ticker = ticker.upper().strip()
+        consolidated = request.query_params.get("consolidated") == "true"
+
+        if not ticker:
+            return Response(
+                {"error": "ticker is required"},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+        
+        statements = get_financials(ticker, consolidated)
+
+        key = (
+            "consolidated_financial_statements"
+            if consolidated
+            else "financial_statements"
+        )
+
+        return Response({key: statements})

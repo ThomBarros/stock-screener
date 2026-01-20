@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from 'react-router-dom';
 
-class App extends Component {
+class SearchPage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -33,7 +34,7 @@ class App extends Component {
   };
 
   getPrice(stock) {
-    axios-
+    axios
       .get(`/api/stocks/fetch_prev_close/?ticker=${stock.stock_ticker}`)
       .then((res) => {
         this.setState((prevState) => ({
@@ -79,7 +80,7 @@ class App extends Component {
   render() {
     return (
       <div>
-          <h1>Stocks</h1>
+          <h1>Search Stocks</h1>
           <div>
             <label>Enter a ticker: </label>
             <input 
@@ -93,7 +94,11 @@ class App extends Component {
           </div>
           <ul>
             {this.state.stockList.map((item) => (
-              <li key={item.id}>{item.stock_ticker} - ${item.recent_price} <button>Financials</button></li>
+              <li key={item.id}>{item.stock_ticker} - ${item.recent_price}
+                <Link to={`/stock/${item.stock_ticker}`}>
+                  <button>Financials</button>
+                </Link> 
+              </li>
             ))}
           </ul>
       </div>
@@ -102,4 +107,4 @@ class App extends Component {
 
 }
 
-export default App;
+export default SearchPage;
