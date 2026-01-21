@@ -4,6 +4,7 @@ from decimal import Decimal
 def scrape_stock_info(ticker):
     stock = yf.Ticker(ticker)
     stock_info = stock.info
+    print(stock_info.keys())
     return stock_info
 
 def get_prev_close_price(ticker):
@@ -13,5 +14,4 @@ def get_prev_close_price(ticker):
     return prev_close
 
 if __name__=="__main__":
-    dat = get_prev_close_price("MSFT")
-    print(dat)
+    scrape_stock_info("AAPL")
