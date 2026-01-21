@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404
 from .models import Stock
 from sec_api import QueryApi
 from .tasks import get_sec_financials, get_sec_primary_financials
+import pandas as pd
 
 
 def get_financials(ticker: str, consolidated: bool):
@@ -11,7 +12,12 @@ def get_financials(ticker: str, consolidated: bool):
         statements = get_sec_primary_financials(ticker)
     else:
         statements = get_sec_financials(ticker)
-    return statements
+    
+    statements_json = {
+        name: df.to_dict(orient="records")
+        for name, df in statements.items()
+    }
+    return statements_json
 
 
 def get_stock_info(ticker: str):
