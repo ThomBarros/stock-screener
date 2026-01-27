@@ -26,7 +26,7 @@ To start the backend run:
 ```
 python manage.py makemigrations
 python manage.py migrate
-python runserver
+python manage.py runserver
 ```
 And to start the frontend run:
 ```
