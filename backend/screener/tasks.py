@@ -147,7 +147,6 @@ def detect_anchor(facts: dict, statement: str) -> Tuple[str, str]:
     if not candidates:
         raise RuntimeError(f"No anchor found for {statement}")
 
-    # Pick the most frequent (accn, end) pair -> primary statement
     return Counter(candidates).most_common(1)[0][0]
 
 
@@ -226,7 +225,6 @@ def extract_financial_statements(facts: dict) -> Dict[str, pd.DataFrame]:
                     "accession": item.get("accn"),
                 })
 
-    # Convert to DataFrames
     dfs = {}
     for name, rows in statements.items():
         df = pd.DataFrame(rows)
@@ -258,14 +256,14 @@ def get_sec_financials(ticker: str) -> Dict:
     return statements
 
 
-# if __name__ == "__main__":
-#     statements = get_sec_financials("AAPL")
-#     primary_statements = get_sec_primary_financials("AAPL")
+if __name__ == "__main__":
+    statements = get_sec_financials("AAPL")
+    primary_statements = get_sec_primary_financials("AAPL")
 
-#     for name, df in statements.items():
-#         print(f"\n{name}")
-#         print(df.head(15))
+    for name, df in statements.items():
+        print(f"\n{name}")
+        print(df.head(15))
 
-#     for name, df in primary_statements.items():
-#         print(f"\n{name}")
-#         print(df.head(15))
+    for name, df in primary_statements.items():
+        print(f"\n{name}")
+        print(df.head(15))

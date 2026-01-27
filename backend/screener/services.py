@@ -2,7 +2,6 @@ import yfinance as yf
 from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from .models import Stock
-from sec_api import QueryApi
 from datetime import datetime, date
 from .tasks import get_sec_financials, get_sec_primary_financials
 import pandas as pd
