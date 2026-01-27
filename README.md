@@ -22,14 +22,16 @@ cd frontend
 npm install
 ```
 
-To start the backend run:
+To start the backend:
 ```
+cd backend
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver
 ```
 And to start the frontend run:
 ```
+cd frontend
 npm start
 ```
 
