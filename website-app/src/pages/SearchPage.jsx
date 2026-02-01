@@ -69,31 +69,55 @@ function SearchPage() {
   };
 
   return (
-    <div>
-      <h1>Search Stocks</h1>
+    <div className="min-h-screen min-w-screen bg-gray-100 p-6">
+      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
+        <h1 className="text-3xl mb-6 text-center text-gray-800">
+          Search Ticker
+        </h1>
 
-      <div>
-        <label>Enter a ticker: </label>
-        <input
-          type="text"
-          minLength={1}
-          maxLength={5}
-          value={tickerInput}
-          onChange={handleInputChange}
-        />
-        <button onClick={searchStock}>Search</button>
+        <div className="flex mb-6 gap-4">
+          <input
+            type="text"
+            minLength={1}
+            maxLength={5}
+            value={tickerInput}
+            onChange={handleInputChange}
+            placeholder="Enter ticker"
+            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent text-gray-800"
+          />
+          <button
+            onClick={searchStock}
+            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg transition-colors"
+          >
+            Search
+          </button>
+        </div>
+
+        <ul className="space-y-4">
+          {stockList.map((item) => (
+            <li
+              key={item.id}
+              className="flex justify-between items-center bg-gray-50 p-4 rounded-lg shadow hover:bg-gray-100 transition"
+            >
+              <div>
+                <span className="font-semibold text-gray-800">
+                  {item.stock_ticker}
+                </span>{" "}
+                -{" "}
+                <span className="text-green-600 font-medium">
+                  ${item.recent_price ?? "N/A"}
+                </span>
+              </div>
+
+              <Link to={`/stock/${item.stock_ticker}`}>
+                <button className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg transition">
+                  Financials
+                </button>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-
-      <ul>
-        {stockList.map((item) => (
-          <li key={item.id}>
-            {item.stock_ticker} - ${item.recent_price}
-            <Link to={`/stock/${item.stock_ticker}`}>
-              <button>Financials</button>
-            </Link>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 }

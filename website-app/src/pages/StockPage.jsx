@@ -45,32 +45,56 @@ function StockPage({ ticker }) {
   }, [ticker]);
 
   return (
-    <div>
-      <h1>{ticker}</h1>
-      {price ? (
-        <div>
-          <p>Price: { price.live_price }</p>
-          <p>Last Updated: { lastUpdated }</p>
+    <div className="min-h-screen min-w-screen bg-gray-100 p-6">
+      <div className="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6 space-y-6">
+        {/* Header */}
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-gray-800">{ticker}</h1>
+          {price ? (
+            <p className="text-xl mt-2 text-green-600">
+              ${price.live_price} <span className="text-gray-500 text-sm">({lastUpdated})</span>
+            </p>
+          ) : (
+            <p className="text-gray-500 mt-2">Loading live price...</p>
+          )}
         </div>
-      ) : (
-        <p>Loading live price...</p>
-      )}
-      <h2>Tearsheet Info</h2>
-      <div>
-        { tearsheetInfo ? (
-        <pre> {JSON.stringify(tearsheetInfo, null, 2)}</pre>
-        ) : (
-          <p>Loading tearsheet...</p>
-        )}
+
+        {/* Tearsheet Info */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-2 text-gray-700">Tearsheet Info</h2>
+          {tearsheetInfo ? (
+            <div className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
+              <pre className="text-left text-sm text-gray-800">
+                {JSON.stringify(tearsheetInfo, null, 2)}
+              </pre>
+            </div>
+          ) : (
+            <p className="text-gray-500">Loading tearsheet...</p>
+          )}
+        </div>
+
+        {/* Financials */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-2 text-gray-700">Financials</h2>
+          {financials ? (
+            <div className="bg-gray-50 p-4 rounded-lg overflow-x-auto">
+              <pre className="text-left text-sm text-gray-800">
+                {JSON.stringify(financials, null, 2)}
+              </pre>
+            </div>
+          ) : (
+            <p className="text-gray-500">Loading financials...</p>
+          )}
+        </div>
       </div>
-      <h2>Financials</h2>
-      {financials ? (
-        <pre style={{ textAlign: "left" }}>{JSON.stringify(financials, null, 2)}</pre>
-      ) : (
-        <p>Loading financials...</p>
-      )}
     </div>
   );
+
+
+
+
+
+
 }
 
 export default StockPageWrapper;
