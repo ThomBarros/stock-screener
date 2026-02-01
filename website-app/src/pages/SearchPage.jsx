@@ -70,7 +70,7 @@ function SearchPage() {
 
   return (
     <div className="min-h-screen min-w-screen bg-gray-100 p-6">
-      <div className="max-w-3xl mx-auto bg-white shadow-lg rounded-lg p-6">
+      <div className="w-[90vw] mx-auto bg-white shadow-lg rounded-lg p-6">
         <h1 className="text-3xl mb-6 text-center text-gray-800">
           Search Ticker
         </h1>

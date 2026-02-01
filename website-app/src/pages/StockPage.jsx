@@ -12,6 +12,13 @@ function StockPage({ ticker }) {
   const [price, setPrice] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(null);
   const [tearsheetInfo, setTearsheetInfo] = useState(null);
+  const [description, setDescription] = useState(null);
+  const [name, setName] = useState(null);
+  const [currency, setCurrency] = useState(null);
+  const [website, setWebsite] = useState(null);
+  const [sector, setSector] = useState(null);
+  const [industry, setIndustry] = useState(null);
+  const [phone, setPhone] = useState(null);
 
   useEffect(() => {
     axios
@@ -40,26 +47,49 @@ function StockPage({ ticker }) {
   useEffect(() => {
     axios
       .get(`/api/stocks/fetch_tearsheet_info/?ticker=${ticker}`)
-      .then((res) => setTearsheetInfo(res.data))
+      .then((res) => {
+        setTearsheetInfo(res.data);
+        setDescription(res.data.tearsheet_info.description);
+        setName(res.data.tearsheet_info.name);
+        setCurrency(res.data.tearsheet_info.currency);
+        setWebsite(res.data.tearsheet_info.website);
+        setSector(res.data.tearsheet_info.sector);
+        setIndustry(res.data.tearsheet_info.industry);
+        setPhone(res.data.tearsheet_info.phone);
+      })
       .catch((err) => console.error(err))
   }, [ticker]);
 
   return (
     <div className="min-h-screen min-w-screen bg-gray-100 p-6">
-      <div className="max-w-7xl mx-auto bg-white shadow-lg rounded-lg p-6 space-y-6">
-        {/* Header */}
+      <div className="w-[90vw] mx-auto bg-white shadow-lg rounded-lg p-6 space-y-6">
+
         <div className="text-center">
-          <h1 className="text-4xl font-bold text-gray-800">{ticker}</h1>
+          <h1 className="text-4xl font-bold text-gray-800">{name} ({ticker})</h1>
           {price ? (
             <p className="text-xl mt-2 text-green-600">
-              ${price.live_price} <span className="text-gray-500 text-sm">({lastUpdated})</span>
+              {currency}${price.live_price} <span className="text-gray-500 text-sm">({lastUpdated})</span>
             </p>
           ) : (
             <p className="text-gray-500 mt-2">Loading live price...</p>
           )}
         </div>
 
-        {/* Tearsheet Info */}
+        <div>
+          <h2 className="text-2xl font-semibold mb-2 text-gray-700">Business Description</h2>
+          <p className="text-gray-800 text-left text-sm">{description}</p>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-2 text-gray-700">Key Info</h2>
+          <p className="text-gray-800 text-left text-sm">
+            Website: <a href={website} target="_blank" rel="noopener noreferrer">{website}</a>
+          </p>
+          <p className="text-gray-800 text-left text-sm">Phone: {phone}</p>
+          <p className="text-gray-800 text-left text-sm">Industry: {industry}</p>
+          <p className="text-gray-800 text-left text-sm">Sector: {sector}</p>
+        </div>
+
         <div>
           <h2 className="text-2xl font-semibold mb-2 text-gray-700">Tearsheet Info</h2>
           {tearsheetInfo ? (
@@ -73,7 +103,6 @@ function StockPage({ ticker }) {
           )}
         </div>
 
-        {/* Financials */}
         <div>
           <h2 className="text-2xl font-semibold mb-2 text-gray-700">Financials</h2>
           {financials ? (
