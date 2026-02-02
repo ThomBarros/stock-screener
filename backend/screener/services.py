@@ -78,6 +78,9 @@ def create_tearsheet_info_dict(ticker: str):
     phone = info.get("phone")
     industry = info.get("industry")
     currency = info.get("currency")
+    employees = info.get("fullTimeEmployees")
+    country = info.get("country")
+    enterprise_value = info.get("enterpriseValue")
     return {
         "name": name,
         "description": desc,
@@ -87,7 +90,10 @@ def create_tearsheet_info_dict(ticker: str):
         "sector": sector,
         "phone": phone,
         "industry": industry,
-        "currency": currency
+        "currency": currency,
+        "employees": employees,
+        "country": country,
+        "enterprise_value": enterprise_value
     }
 
 def custom_converter(obj):

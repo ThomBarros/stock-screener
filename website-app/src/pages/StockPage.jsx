@@ -19,6 +19,9 @@ function StockPage({ ticker }) {
   const [sector, setSector] = useState(null);
   const [industry, setIndustry] = useState(null);
   const [phone, setPhone] = useState(null);
+  const [employees, setEmployees] = useState(null);
+  const [country, setCountry] = useState(null);
+  const [enterpriseValue, setEnterpriseValue] = useState(null);
 
   useEffect(() => {
     axios
@@ -56,6 +59,9 @@ function StockPage({ ticker }) {
         setSector(res.data.tearsheet_info.sector);
         setIndustry(res.data.tearsheet_info.industry);
         setPhone(res.data.tearsheet_info.phone);
+        setEmployees(res.data.tearsheet_info.employees);
+        setCountry(res.data.tearsheet_info.country);
+        setEnterpriseValue(res.data.tearsheet_info.enterprise_value);
       })
       .catch((err) => console.error(err))
   }, [ticker]);
@@ -88,6 +94,13 @@ function StockPage({ ticker }) {
           <p className="text-gray-800 text-left text-sm">Phone: {phone}</p>
           <p className="text-gray-800 text-left text-sm">Industry: {industry}</p>
           <p className="text-gray-800 text-left text-sm">Sector: {sector}</p>
+          <p className="text-gray-800 text-left text-sm">Number of employees: {employees}</p>
+          <p className="text-gray-800 text-left text-sm">Country: {country}</p>
+        </div>
+
+        <div>
+          <h2 className="text-2xl font-semibold mb-2 text-gray-700">Key Financials</h2>
+          <p className="text-gray-800 text-left text-sm">Enterprise value: {enterpriseValue}</p>
         </div>
 
         <div>
