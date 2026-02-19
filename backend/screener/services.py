@@ -74,12 +74,26 @@ def create_tearsheet_info_dict(ticker: str):
     market_cap = info.get("marketCap")
     exchange = info.get("exchange")
     website = info.get("website")
+    sector = info.get("sector")
+    phone = info.get("phone")
+    industry = info.get("industry")
+    currency = info.get("currency")
+    employees = info.get("fullTimeEmployees")
+    country = info.get("country")
+    enterprise_value = info.get("enterpriseValue")
     return {
         "name": name,
         "description": desc,
         "market_cap": market_cap,
         "exchange": exchange,
-        "website": website
+        "website": website,
+        "sector": sector,
+        "phone": phone,
+        "industry": industry,
+        "currency": currency,
+        "employees": employees,
+        "country": country,
+        "enterprise_value": enterprise_value
     }
 
 def custom_converter(obj):
