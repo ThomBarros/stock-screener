@@ -66,6 +66,9 @@ function StockPage({ ticker }) {
       .catch((err) => console.error(err))
   }, [ticker]);
 
+
+
+
   return (
     <div className="min-h-screen min-w-screen bg-gray-100 p-6">
       <div className="w-[90vw] mx-auto bg-white shadow-lg rounded-lg p-6 space-y-6">
@@ -88,14 +91,31 @@ function StockPage({ ticker }) {
 
         <div>
           <h2 className="text-2xl font-semibold mb-2 text-gray-700">Key Info</h2>
-          <p className="text-gray-800 text-left text-sm">
-            Website: <a href={website} target="_blank" rel="noopener noreferrer">{website}</a>
-          </p>
-          <p className="text-gray-800 text-left text-sm">Phone: {phone}</p>
-          <p className="text-gray-800 text-left text-sm">Industry: {industry}</p>
-          <p className="text-gray-800 text-left text-sm">Sector: {sector}</p>
-          <p className="text-gray-800 text-left text-sm">Number of employees: {employees}</p>
-          <p className="text-gray-800 text-left text-sm">Country: {country}</p>
+
+         <div>
+         <table class="table-auto w-full">
+          <thead className="text-gray-800 text-center bg-gray-200">
+            <tr>
+              <th>Website</th>
+              <th>Phone</th>
+              <th>Industry/Sector</th>
+              <th>Number of employees</th>
+              <th>Country</th>
+            </tr>
+          </thead>
+          <tbody className="text-gray-800 text-center bg-gray-100">
+            <tr>
+              <td>
+                <a href={website} target="_blank" rel="noopener noreferrer">{website}</a>
+              </td>
+              <td>{phone}</td>
+              <td>{industry}/{sector}</td>
+              <td>{employees}</td>
+              <td>{country}</td>
+            </tr>
+          </tbody>
+        </table>  
+        </div>
         </div>
 
         <div>
