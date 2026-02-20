@@ -22,6 +22,8 @@ function StockPage({ ticker }) {
   const [employees, setEmployees] = useState(null);
   const [country, setCountry] = useState(null);
   const [enterpriseValue, setEnterpriseValue] = useState(null);
+  const [dividendRate, setDividendRate] = useState(null);
+  const [dividendYield, setDividendYield] = useState(null);
 
   useEffect(() => {
     axios
@@ -62,6 +64,8 @@ function StockPage({ ticker }) {
         setEmployees(res.data.tearsheet_info.employees);
         setCountry(res.data.tearsheet_info.country);
         setEnterpriseValue(res.data.tearsheet_info.enterprise_value);
+        setDividendRate(res.data.tearsheet_info.dividend_Rate);
+        setDividendYield(res.data.tearsheet_info.dividend_Yield);
       })
       .catch((err) => console.error(err))
   }, [ticker]);
@@ -121,6 +125,8 @@ function StockPage({ ticker }) {
         <div>
           <h2 className="text-2xl font-semibold mb-2 text-gray-700">Key Financials</h2>
           <p className="text-gray-800 text-left text-sm">Enterprise value: {enterpriseValue}</p>
+          <p className="text-gray-800 text-left text-sm">Dividend rate: {dividendRate}</p>
+          <p className="text-gray-800 text-left text-sm">Dividend yield: {dividendYield}</p>
         </div>
 
         <div>
