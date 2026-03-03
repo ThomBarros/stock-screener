@@ -104,7 +104,7 @@ def create_tearsheet_info_dict(ticker: str):
     total_debt = info.get("totalDebt")
     quick_ratio = info.get("quickRatio")
     current_ratio = info.get("currentRatio")
-    total_revenue = info.get("currentRatio")
+    total_revenue = info.get("totalRevenue")
     debt_to_equity = info.get("debtToEquity")
     revenue_per_share = info.get("revenuePerShare")
     return_on_assets = info.get("returnOnAssets")
